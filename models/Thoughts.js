@@ -1,4 +1,5 @@
 const { Schema, model } = require('mongoose');
+const dateFormat = require('dateFormat');
 
 const Thoughts = model('Thoughts', ThoughtsSchema);
 
@@ -11,9 +12,8 @@ const ThoughtsSchema = new Schema({
     },
     createAt: {
         type: Date,
-        default: Date.current,
-        getter: true,
-        // get: timestamp => dateFormat(timestamp)
+        default: Date.now,
+        get: timestamp => dateFormat(timestamp)
     },
     username: {
         type: String,

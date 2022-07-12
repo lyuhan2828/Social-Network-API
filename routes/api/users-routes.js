@@ -10,13 +10,13 @@ const {
 
 router
   .route('/')
-  .get()
-  .post();
+  .get(getUserById)
+  .post(createUser);
 
 router
   .route('/:id')
-  .get()
-  .put()
-  .delete();
+  .get(getAllUser)
+  .put(updateUser)
+  .delete(deleteUser);
 
 module.exports = router;
