@@ -29,6 +29,7 @@ getAllUser(req, res) {
   },
   // create new User
   createUser(req, res) {
+    console.log('getting here')
     User.create(req.body)
     .then((dbUserData) => {
       res.json(dbUserData);
