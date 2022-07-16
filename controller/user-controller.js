@@ -1,8 +1,8 @@
 const { User, Thoughts } = require('../models');
 
 const userController = {
-// get all users
-getAllUser(req, res) {
+  // get all users
+  getAllUser(req, res) {
     User.find({})
       .then(dbUserData => res.json(dbUserData))
       .catch(err => {
@@ -31,35 +31,36 @@ getAllUser(req, res) {
   createUser(req, res) {
     console.log('getting here')
     User.create(req.body)
-    .then((dbUserData) => {
-      res.json(dbUserData);
-    })
-    .catch(err => {
-      console.log(err);
-      res.status(500).json(err);
-    });
+      .then((dbUserData) => {
+        res.json(dbUserData);
+      })
+      .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+      });
   },
   // Update User
   updateUser(req, res) {
-    User.findOneAndUpdate(
-      {_id: req.params.userId},
-      {$set: req.body},
-      {runValidators: true,
-      new: true,
-    }
-    )
-    .then((dbUserData) => {
-      if(!dbUserData) {
-        return res.status(404).json({message: 'No user with this id exist'})
+      User.findOneAndUpdate(
+        {_id : req.params.id},
+        {$set: req.body},
+        {runValidators: true,
+        new: true,
       }
-      res.json(dbUserData)
-    })
-    .catch(err => {
-      console.log(err);
-      res.status(500).json(err);
-    });
-  }
+      )
+      .then((dbUserData) => {
+        if(!dbUserData) {
+          return res.status(404).json({message: 'No user with this id exist'})
+        }
+        res.json(dbUserData)
+      })
+      .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+      });
+    
 
+  }
 };
 
 module.exports = userController;

@@ -27,10 +27,11 @@ const thoughtController = {
             });
     },
     createThought(req, res) {
+        console.log(req.params)
         Thoughts.create(req.body)
             .then((dbThoughtData) => {
                 return User.findOneAndUpdate(
-                    { _id: req.body.userId },
+                    { _id: req.params.userId },
                     { $push: { thoughts: dbThoughtData._id } },
                     { new: true }
                 );
@@ -48,8 +49,9 @@ const thoughtController = {
     },
     // update a thought findOneAndUpdate
     updateThought(req, res) {
+      console.log(req.params)
         Thoughts.findOneAndUpdate(
-            { _id: req.params.Thoughts.id },
+            { _id: req.params.id },
             { $set: req.body },
             {
                 runValidators: true,
@@ -98,6 +100,7 @@ removeReaction({params}, res) {
 
 // add a reaction to a thought findOneAndUpdate
 addReaction({params, body}, res) {
+    console.log(params,body)
     Thoughts.findOneAndUpdate(
         {_id: params.thoughtId}, 
         {$push: {reactions: body}}, 

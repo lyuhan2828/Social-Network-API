@@ -11,6 +11,7 @@ const {
 router
   .route('/:id')
   .get(getUserById)
+  .put(updateUser)
   // .post(createUser);
 
 router
@@ -19,8 +20,5 @@ router
   .post(createUser)
   // .delete(deleteUser);
 
-// router
-//   .route('/')
-//   .post(createUser)
 
 module.exports = router;
